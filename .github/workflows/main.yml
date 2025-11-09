@@ -1,0 +1,39 @@
+name: Matrix Build with Artifacts
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        version: [14, 16, 18]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: matrix-72dc959
+        run: |
+          echo "Building for Node ${{ matrix.version }}"
+          echo "matrix-version=${{ matrix.version }}" > matrix.txt
+
+      - name: Setup Node ${{ matrix.version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.version }}
+
+      - name: Generate build artifact
+        run: |
+          echo "Build artifact for Node version ${{ matrix.version }}" > output.txt
+          echo "Generated on $(date)" >> output.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-72dc959-v${{ matrix.version }}
+          path: output.txt
