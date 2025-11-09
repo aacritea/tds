@@ -3,4 +3,4 @@
 
 This repo demonstrates a GitHub Actions matrix build with artifact uploads.
 
-**Contact:** aakritijain1412@gmail.com
+**Contact:** 23f3003343@ds.study.iitm.ac.in
